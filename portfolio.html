@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S. Divakar — AI Governance & Compliance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f12;
+    --bg2: #131720;
+    --bg3: #1a1f2b;
+    --border: rgba(255,255,255,0.08);
+    --border2: rgba(255,255,255,0.14);
+    --ink: #e8e4dc;
+    --ink2: #9a9690;
+    --ink3: #5e5c58;
+    --gold: #c4973a;
+    --gold2: #e8b85a;
+    --blue: #4a7fa8;
+    --card: #161b24;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.25rem 3rem;
+    background: rgba(13, 15, 18, 0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem; font-weight: 500;
+    color: var(--gold); text-decoration: none; letter-spacing: 0.04em;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.75rem; font-weight: 400; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink2); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 0 3rem;
+    padding-top: 72px;
+    max-width: 900px;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-eyebrow {
+    font-size: 0.7rem; font-weight: 500; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 2rem;
+    opacity: 0; animation: fadeUp 0.8s 0.1s forwards;
+  }
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(4rem, 7vw, 7rem);
+    font-weight: 500; line-height: 1.0;
+    color: var(--ink); margin-bottom: 1.5rem;
+    opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
+  }
+  .hero-divider {
+    width: 48px; height: 1px; background: var(--gold);
+    margin-bottom: 2rem;
+    opacity: 0; animation: fadeUp 0.8s 0.3s forwards;
+  }
+  .hero-statement {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    font-weight: 400; line-height: 1.5;
+    color: var(--ink2); max-width: 680px;
+    margin-bottom: 3rem;
+    opacity: 0; animation: fadeUp 0.8s 0.4s forwards;
+  }
+  .hero-statement em { font-style: italic; color: var(--gold2); }
+  .hero-creds {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+    opacity: 0; animation: fadeUp 0.8s 0.5s forwards;
+  }
+  .cred {
+    font-size: 0.68rem; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; padding: 0.35rem 0.85rem;
+    border: 1px solid var(--border2); border-radius: 2px;
+    color: var(--ink2); transition: all 0.2s;
+  }
+  .cred:hover { border-color: var(--gold); color: var(--gold); }
+  .cred.highlight { border-color: var(--gold); color: var(--gold); }
+
+  /* SECTIONS */
+  section { padding: 6rem 3rem; }
+  .section-header {
+    display: flex; align-items: baseline; gap: 1.5rem;
+    margin-bottom: 4rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-num {
+    font-size: 0.68rem; font-weight: 500; color: var(--gold);
+    letter-spacing: 0.12em; text-transform: uppercase; flex-shrink: 0;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 500; color: var(--ink); line-height: 1.1;
+  }
+
+  /* ABOUT */
+  #about { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; }
+  .about-col h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem; font-weight: 500;
+    margin-bottom: 1.25rem; color: var(--ink);
+  }
+  .about-col p { color: var(--ink2); margin-bottom: 1rem; font-size: 0.93rem; line-height: 1.85; }
+  .timeline { margin-top: 0.5rem; }
+  .timeline-item {
+    display: grid; grid-template-columns: 90px 1fr;
+    gap: 1rem; padding: 1rem 0;
+    border-top: 1px solid var(--border);
+  }
+  .timeline-year { font-size: 0.72rem; color: var(--gold); font-weight: 500; letter-spacing: 0.04em; padding-top: 0.15rem; }
+  .timeline-role { font-size: 0.88rem; font-weight: 500; color: var(--ink); margin-bottom: 0.15rem; }
+  .timeline-co { font-size: 0.78rem; color: var(--ink3); }
+
+  /* PROJECTS */
+  #projects { background: var(--bg); }
+  .projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); }
+  .project-card {
+    background: var(--card); padding: 2.5rem;
+    transition: background 0.25s; position: relative; overflow: hidden;
+  }
+  .project-card::after {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--gold), var(--blue));
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.35s;
+  }
+  .project-card:not(.coming-soon):hover { background: #1c2232; }
+  .project-card:not(.coming-soon):hover::after { transform: scaleX(1); }
+  .project-card.coming-soon { opacity: 0.45; }
+  .project-tag {
+    font-size: 0.65rem; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 1.2rem; display: block;
+  }
+  .project-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.45rem; font-weight: 500;
+    color: var(--ink); margin-bottom: 0.75rem; line-height: 1.25;
+  }
+  .project-desc { font-size: 0.86rem; color: var(--ink2); line-height: 1.8; margin-bottom: 1.5rem; }
+  .project-pills { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-bottom: 1.75rem; }
+  .pill {
+    font-size: 0.63rem; font-weight: 500; letter-spacing: 0.06em;
+    padding: 0.22rem 0.6rem; border-radius: 2px;
+    background: var(--bg3); color: var(--ink3);
+    text-transform: uppercase; border: 1px solid var(--border);
+  }
+  .project-link {
+    font-size: 0.75rem; font-weight: 500; color: var(--gold);
+    letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    transition: gap 0.2s, color 0.2s;
+  }
+  .project-link:hover { gap: 0.8rem; color: var(--gold2); }
+  .coming-label { font-size: 0.68rem; color: var(--ink3); letter-spacing: 0.08em; text-transform: uppercase; }
+
+  /* SKILLS */
+  #skills { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4rem; }
+  .skill-group h3 {
+    font-size: 0.68rem; font-weight: 500; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 1.75rem;
+  }
+  .skill-item {
+    font-size: 0.87rem; color: var(--ink2);
+    padding: 0.65rem 0; border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 0.75rem;
+    transition: color 0.2s;
+  }
+  .skill-item:hover { color: var(--ink); }
+  .skill-item::before {
+    content: ''; width: 3px; height: 3px; border-radius: 50%;
+    background: var(--gold); flex-shrink: 0;
+  }
+
+  /* CONTACT */
+  #contact { background: var(--bg); }
+  .contact-inner { max-width: 660px; }
+  .contact-inner h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 500;
+    color: var(--ink); margin-bottom: 1.25rem; line-height: 1.15;
+  }
+  .contact-inner h2 em { font-style: italic; color: var(--gold2); }
+  .contact-inner p { color: var(--ink2); margin-bottom: 2.5rem; max-width: 480px; font-size: 0.93rem; line-height: 1.85; }
+  .contact-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .contact-btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.85rem 1.75rem; font-size: 0.75rem; font-weight: 500;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    text-decoration: none; border-radius: 2px; transition: all 0.2s;
+  }
+  .btn-primary { background: var(--gold); color: #0d0f12; }
+  .btn-primary:hover { background: var(--gold2); }
+  .btn-outline { border: 1px solid var(--border2); color: var(--ink2); }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* FOOTER */
+  footer {
+    padding: 2rem 3rem; border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.75rem; color: var(--ink3); background: var(--bg2);
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem; font-weight: 500;
+    color: var(--gold); text-decoration: none;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  .reveal {
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.7s, transform 0.7s;
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { padding: 6rem 1.5rem 4rem; }
+    .about-grid, .projects-grid, .skills-grid { grid-template-columns: 1fr; }
+    section { padding: 4rem 1.5rem; }
+    footer { flex-direction: column; gap: 0.75rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">S. Divakar</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-eyebrow">AI Governance &amp; Compliance — Perth, WA</p>
+  <h1 class="hero-name">S. Divakar</h1>
+  <div class="hero-divider"></div>
+  <p class="hero-statement">Most AI governance professionals understand policy.<br>Few understand <em>how models actually fail.</em><br>I do both.</p>
+  <div class="hero-creds">
+    <span class="cred">CA</span>
+    <span class="cred">CFE</span>
+    <span class="cred highlight">AIGP — In progress</span>
+    <span class="cred">Ernst &amp; Young</span>
+    <span class="cred">Python</span>
+    <span class="cred">SHAP / XAI</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header reveal">
+    <span class="section-num">01 — About</span>
+    <h2 class="section-title">The background &amp; the pivot</h2>
+  </div>
+  <div class="about-grid">
+    <div class="about-col reveal">
+      <h3>Why AI governance?</h3>
+      <p>AI governance needs people who can look at a model and ask the same questions a forensic auditor would — what can go wrong, who is affected, and can you prove it's working as intended?</p>
+      <p>After 5+ years building those skills in financial investigations and external audit at EY and the Office of the Auditor General, I'm applying them to the fast-growing challenge of keeping AI systems accountable.</p>
+      <p>My combination of technical data science knowledge, forensic investigation experience, and deep familiarity with compliance frameworks is rare in this space — and that's the point.</p>
+    </div>
+    <div class="about-col reveal">
+      <h3>Career timeline</h3>
+      <div class="timeline">
+        <div class="timeline-item">
+          <span class="timeline-year">2025 — Now</span>
+          <div><div class="timeline-role">Senior Forensic Consultant</div><div class="timeline-co">Ernst &amp; Young</div></div>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-year">2024 — 2025</span>
+          <div><div class="timeline-role">Senior Forensic Auditor</div><div class="timeline-co">Office of the Auditor General</div></div>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-year">2021 — 2024</span>
+          <div><div class="timeline-role">Senior Associate — Audit</div><div class="timeline-co">Ernst &amp; Young</div></div>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-year">2020 — Now</span>
+          <div><div class="timeline-role">Founder</div><div class="timeline-co">MoneyWise (Social Enterprise)</div></div>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-year">UWA</span>
+          <div><div class="timeline-role">B.Com — Accounting &amp; Data Science</div><div class="timeline-co">University of Western Australia</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header reveal">
+    <span class="section-num">02 — Projects</span>
+    <h2 class="section-title">Governance in practice</h2>
+  </div>
+  <div class="projects-grid">
+    <div class="project-card reveal">
+      <span class="project-tag">XAI + Forensics — Project 01</span>
+      <h3 class="project-title">Fraud Detection Model &amp; Explainability Audit</h3>
+      <p class="project-desc">Built a Random Forest fraud detection model on a 10,000-transaction synthetic dataset, then audited it using SHAP explainability. Produced a formal AI Governance Audit Report identifying critical class imbalance risks, referencing NIST AI RMF, ISO 42001, and APRA CPG 234.</p>
+      <div class="project-pills">
+        <span class="pill">Python</span>
+        <span class="pill">Random Forest</span>
+        <span class="pill">SHAP</span>
+        <span class="pill">NIST AI RMF</span>
+        <span class="pill">ISO 42001</span>
+        <span class="pill">APRA CPG 234</span>
+      </div>
+      <a href="fraud-case-study.html" class="project-link">Read the case study →</a>
+    </div>
+
+    <div class="project-card reveal">
+      <span class="project-tag">AI Risk Assessment — Project 02</span>
+      <h3 class="project-title">ProcureIQ: AI-Assisted Procurement Risk Assessment</h3>
+      <p class="project-desc">Pre-deployment AI risk assessment for a fictional government procurement system. Assessed 10 risks across five domains, produced a split use case decision, and mapped all findings to the NIST AI RMF. References the PGPA Act and Australian public sector accountability obligations.</p>
+      <div class="project-pills">
+        <span class="pill">NIST AI RMF</span>
+        <span class="pill">Gov Procurement</span>
+        <span class="pill">Risk Assessment</span>
+        <span class="pill">PGPA Act</span>
+        <span class="pill">Bias Risk</span>
+      </div>
+      <a href="procureiq-case-study.html" class="project-link">Read the case study →</a>
+    </div>
+
+    <div class="project-card coming-soon reveal">
+      <span class="project-tag">AI Risk — Project 03</span>
+      <h3 class="project-title">ISO 42001 Gap Analysis</h3>
+      <p class="project-desc">A structured gap analysis of a fictional financial services organisation against the ISO 42001 AI Management Systems standard — mapping current state, identifying gaps, and producing a remediation roadmap.</p>
+      <div class="project-pills">
+        <span class="pill">ISO 42001</span>
+        <span class="pill">Gap Analysis</span>
+        <span class="pill">AI Risk</span>
+      </div>
+      <span class="coming-label">Coming soon</span>
+    </div>
+
+    <div class="project-card coming-soon reveal">
+      <span class="project-tag">Fairness — Project 04</span>
+      <h3 class="project-title">Algorithmic Bias Audit</h3>
+      <p class="project-desc">Auditing a public hiring dataset for algorithmic bias across demographic groups, with governance recommendations and a proposed monitoring framework.</p>
+      <div class="project-pills">
+        <span class="pill">Fairness Testing</span>
+        <span class="pill">Bias Detection</span>
+        <span class="pill">Model Governance</span>
+      </div>
+      <span class="coming-label">Coming soon</span>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header reveal">
+    <span class="section-num">03 — Skills</span>
+    <h2 class="section-title">What I bring</h2>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-group reveal">
+      <h3>Governance &amp; Compliance</h3>
+      <div class="skill-item">NIST AI Risk Management Framework</div>
+      <div class="skill-item">ISO 42001 AI Management Systems</div>
+      <div class="skill-item">APRA CPG 234</div>
+      <div class="skill-item">AI Governance Professional (AIGP)</div>
+      <div class="skill-item">Risk Assessment &amp; Control Testing</div>
+      <div class="skill-item">Audit &amp; Assurance Frameworks</div>
+    </div>
+    <div class="skill-group reveal">
+      <h3>Technical</h3>
+      <div class="skill-item">Python (scikit-learn, pandas)</div>
+      <div class="skill-item">SHAP Explainability (XAI)</div>
+      <div class="skill-item">Machine Learning — Classification</div>
+      <div class="skill-item">Data Analysis &amp; Visualisation</div>
+      <div class="skill-item">MySQL</div>
+      <div class="skill-item">Anomaly Detection</div>
+    </div>
+    <div class="skill-group reveal">
+      <h3>Professional</h3>
+      <div class="skill-item">Chartered Accountant (CA)</div>
+      <div class="skill-item">Certified Fraud Examiner (CFE)</div>
+      <div class="skill-item">Forensic Investigation</div>
+      <div class="skill-item">Financial Crime Analysis</div>
+      <div class="skill-item">Stakeholder Communication</div>
+      <div class="skill-item">Big 4 Consulting (EY)</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner reveal">
+    <h2>Let's talk about <em>responsible AI</em></h2>
+    <p>I'm actively looking for opportunities in AI governance, compliance, and risk — particularly roles that need someone who understands both the technical and the regulatory sides of AI accountability.</p>
+    <div class="contact-links">
+      <a href="mailto:s.divakarr@gmail.com" class="contact-btn btn-primary">s.divakarr@gmail.com</a>
+      <a href="https://linkedin.com" class="contact-btn btn-outline">LinkedIn →</a>
+      <a href="#" class="contact-btn btn-outline">Download CV</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <a href="#" class="footer-logo">S. Divakar</a>
+  <span>AI Governance &amp; Compliance Portfolio — Perth, WA</span>
+  <span>2026</span>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

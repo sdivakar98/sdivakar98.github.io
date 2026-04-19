@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProcureIQ Risk Assessment — S. Divakar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f12;
+    --bg2: #131720;
+    --bg3: #1a1f2b;
+    --border: rgba(255,255,255,0.08);
+    --border2: rgba(255,255,255,0.14);
+    --ink: #e8e4dc;
+    --ink2: #9a9690;
+    --ink3: #5e5c58;
+    --gold: #c4973a;
+    --gold2: #e8b85a;
+    --blue: #4a7fa8;
+    --card: #161b24;
+    --green: #2d6a4f;
+    --green-bg: #0d2b1f;
+    --amber-bg: #2b1f0d;
+    --red-bg: #2b0d0d;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.25rem 3rem;
+    background: rgba(13,15,18,0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; font-weight: 500;
+    color: var(--gold); text-decoration: none;
+  }
+  .nav-back {
+    font-size: 0.75rem; font-weight: 400; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink2); text-decoration: none;
+    transition: color 0.2s; display: flex; align-items: center; gap: 0.5rem;
+  }
+  .nav-back:hover { color: var(--ink); }
+
+  /* HERO */
+  .hero {
+    padding: 9rem 3rem 5rem;
+    border-bottom: 1px solid var(--border);
+    max-width: 860px;
+  }
+  .breadcrumb {
+    font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 1.5rem;
+    opacity: 0; animation: fadeUp 0.7s 0.1s forwards;
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 500; line-height: 1.1;
+    color: var(--ink); margin-bottom: 0.75rem;
+    opacity: 0; animation: fadeUp 0.7s 0.2s forwards;
+  }
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: 1.2rem;
+    color: var(--ink2); margin-bottom: 2rem;
+    opacity: 0; animation: fadeUp 0.7s 0.3s forwards;
+  }
+  .hero-divider {
+    width: 40px; height: 1px; background: var(--gold);
+    margin-bottom: 2rem;
+    opacity: 0; animation: fadeUp 0.7s 0.35s forwards;
+  }
+  .hero-meta {
+    display: flex; flex-wrap: wrap; gap: 2rem;
+    margin-bottom: 2.5rem;
+    opacity: 0; animation: fadeUp 0.7s 0.4s forwards;
+  }
+  .meta-item { }
+  .meta-label { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink3); margin-bottom: 0.2rem; }
+  .meta-value { font-size: 0.88rem; color: var(--ink2); }
+  .hero-actions {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    opacity: 0; animation: fadeUp 0.7s 0.5s forwards;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.75rem 1.5rem; font-size: 0.75rem; font-weight: 500;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    text-decoration: none; border-radius: 2px; transition: all 0.2s;
+  }
+  .btn-gold { background: var(--gold); color: #0d0f12; }
+  .btn-gold:hover { background: var(--gold2); }
+  .btn-outline { border: 1px solid var(--border2); color: var(--ink2); }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* CONTENT */
+  .content { max-width: 860px; margin: 0 auto; }
+  .section { padding: 4rem 3rem; border-bottom: 1px solid var(--border); }
+
+  .section-label {
+    font-size: 0.65rem; font-weight: 500; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 1.25rem; display: block;
+  }
+  .section h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    font-weight: 500; color: var(--ink);
+    margin-bottom: 1.25rem; line-height: 1.2;
+  }
+  .section p {
+    color: var(--ink2); font-size: 0.93rem;
+    line-height: 1.85; margin-bottom: 1rem;
+  }
+
+  /* OUTCOME CARDS */
+  .outcome-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: var(--border);
+    margin: 2rem 0;
+  }
+  .outcome-card {
+    background: var(--card); padding: 1.75rem;
+  }
+  .outcome-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem; font-weight: 500;
+    line-height: 1; margin-bottom: 0.4rem;
+  }
+  .outcome-label { font-size: 0.78rem; color: var(--ink2); line-height: 1.5; }
+
+  /* FINDING HIGHLIGHTS */
+  .findings-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1rem; margin: 2rem 0;
+  }
+  .finding-card {
+    padding: 1.5rem; border-radius: 2px;
+    border-left: 3px solid;
+  }
+  .finding-card.critical { border-color: #e24b4a; background: var(--red-bg); }
+  .finding-card.high { border-color: var(--gold); background: var(--amber-bg); }
+  .finding-card.positive { border-color: #2d9e6b; background: var(--green-bg); }
+  .finding-card h4 {
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; margin-bottom: 0.6rem;
+  }
+  .finding-card.critical h4 { color: #e24b4a; }
+  .finding-card.high h4 { color: var(--gold); }
+  .finding-card.positive h4 { color: #2d9e6b; }
+  .finding-card p { font-size: 0.85rem; color: var(--ink2); line-height: 1.7; margin: 0; }
+
+  /* RISK TABLE */
+  .table-wrap { overflow-x: auto; margin: 1.5rem 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+  th {
+    background: #1a1f2b; color: var(--gold);
+    font-size: 0.65rem; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 0.75rem 1rem;
+    text-align: left; border-bottom: 1px solid var(--border2);
+    white-space: nowrap;
+  }
+  td {
+    padding: 0.75rem 1rem; border-bottom: 1px solid var(--border);
+    color: var(--ink2); vertical-align: top;
+  }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+  .badge {
+    display: inline-block; padding: 0.2rem 0.6rem;
+    border-radius: 2px; font-size: 0.68rem; font-weight: 500;
+    letter-spacing: 0.05em; white-space: nowrap;
+  }
+  .badge-critical { background: rgba(226,75,74,0.15); color: #e24b4a; }
+  .badge-high { background: rgba(196,151,58,0.15); color: var(--gold2); }
+  .badge-medium { background: rgba(74,127,168,0.15); color: #7ab3d4; }
+  .badge-low { background: rgba(45,158,107,0.15); color: #4dba8a; }
+  .badge-approved { background: rgba(45,158,107,0.15); color: #4dba8a; }
+  .badge-conditional { background: rgba(196,151,58,0.15); color: var(--gold2); }
+  .badge-notapproved { background: rgba(226,75,74,0.15); color: #e24b4a; }
+
+  /* USE CASE TABLE */
+  .usecase-row td:first-child { color: var(--ink); font-weight: 500; }
+
+  /* NIST PILLS */
+  .nist-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 1.5rem 0; }
+  .nist-card { background: var(--card); border: 1px solid var(--border); padding: 1.25rem; border-radius: 2px; }
+  .nist-card h4 {
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem;
+  }
+  .nist-card p { font-size: 0.82rem; color: var(--ink2); line-height: 1.7; margin: 0; }
+
+  /* FOOTER */
+  .page-footer {
+    padding: 2rem 3rem; border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.75rem; color: var(--ink3); background: var(--bg2);
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem; font-weight: 500;
+    color: var(--gold); text-decoration: none;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .hero { padding: 7rem 1.5rem 3rem; }
+    .section { padding: 3rem 1.5rem; }
+    .outcome-grid { grid-template-columns: 1fr; }
+    .findings-grid { grid-template-columns: 1fr; }
+    .nist-grid { grid-template-columns: 1fr; }
+    .page-footer { flex-direction: column; gap: 0.75rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="portfolio.html" class="nav-logo">S. Divakar</a>
+  <a href="portfolio.html#projects" class="nav-back">← Back to portfolio</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="breadcrumb">Project 02 — AI Risk Assessment</p>
+  <h1>ProcureIQ: AI-Assisted Procurement Risk Assessment</h1>
+  <p class="hero-sub">Department of Infrastructure and Procurement — NIST AI RMF 1.0</p>
+  <div class="hero-divider"></div>
+  <div class="hero-meta">
+    <div class="meta-item">
+      <div class="meta-label">Framework</div>
+      <div class="meta-value">NIST AI RMF 1.0</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Sector</div>
+      <div class="meta-value">Australian Government Procurement</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Type</div>
+      <div class="meta-value">Pre-deployment AI Risk Assessment</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Outcome</div>
+      <div class="meta-value">Conditional Approval — Split decision</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Date</div>
+      <div class="meta-value">April 2026</div>
+    </div>
+  </div>
+  <div class="hero-actions">
+    <a href="ProcureIQ_AI_Risk_Assessment_DivakarS.pdf" download class="btn btn-gold">Download full report (PDF)</a>
+    <a href="#findings" class="btn btn-outline">Read case study ↓</a>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- OVERVIEW -->
+  <div class="section reveal" id="findings">
+    <span class="section-label">Overview</span>
+    <h2>The scenario</h2>
+    <p>The Department of Infrastructure and Procurement (DIP) was evaluating ProcureIQ — an AI-assisted supplier evaluation system — for use across standard government contracts valued between $80,000 and $500,000. The system would ingest tender submissions, score them against weighted evaluation criteria, and produce a ranked shortlist for human delegates.</p>
+    <p>I was engaged to conduct a pre-deployment AI risk assessment to determine whether ProcureIQ was fit for purpose across its five proposed use cases, and to identify the governance controls required before deployment could proceed.</p>
+
+    <div class="outcome-grid">
+      <div class="outcome-card">
+        <div class="outcome-num" style="color: var(--gold)">10</div>
+        <div class="outcome-label">Risks identified across five domains</div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-num" style="color: #4dba8a">2</div>
+        <div class="outcome-label">Use cases approved for deployment</div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-num" style="color: #e24b4a">2</div>
+        <div class="outcome-label">Use cases not approved</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KEY FINDINGS -->
+  <div class="section reveal">
+    <span class="section-label">Key Findings</span>
+    <h2>What the assessment found</h2>
+    <div class="findings-grid">
+      <div class="finding-card critical">
+        <h4>Critical — Algorithmic bias risk</h4>
+        <p>ProcureIQ's training data (2018–2024 historical awards) likely underrepresents SME and Indigenous suppliers, creating a structural scoring disadvantage that must be independently audited before deployment.</p>
+      </div>
+      <div class="finding-card critical">
+        <h4>Critical — Explainability gap</h4>
+        <p>The system cannot generate per-submission explainability reports in its current state. Without this, affected suppliers have no basis on which to understand or challenge a score — a breach of emerging accountability standards.</p>
+      </div>
+      <div class="finding-card high">
+        <h4>High — Over-reliance risk</h4>
+        <p>Without structured training, procurement delegates are likely to treat AI-ranked shortlists as authoritative rather than advisory — undermining the human oversight requirement under the PGPA Act.</p>
+      </div>
+      <div class="finding-card positive">
+        <h4>Strength — Sound technical foundation</h4>
+        <p>For lower-stakes pre-screening use cases, ProcureIQ presents a manageable risk profile. The system architecture is sound and the vendor has committed to Australian data residency.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- RISK REGISTER -->
+  <div class="section reveal">
+    <span class="section-label">Risk Register</span>
+    <h2>Identified risks</h2>
+    <p>Ten risks were identified across five governance domains and mapped to the relevant NIST AI RMF function:</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:32%">Risk</th>
+            <th>NIST Function</th>
+            <th>Rating</th>
+            <th>Use Case Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Algorithmic bias against SME or Indigenous suppliers</td>
+            <td>Map / Measure</td>
+            <td><span class="badge badge-critical">Critical</span></td>
+            <td><span class="badge badge-notapproved">Not Approved</span></td>
+          </tr>
+          <tr>
+            <td>Lack of explainability for scored decisions</td>
+            <td>Govern / Measure</td>
+            <td><span class="badge badge-critical">Critical</span></td>
+            <td><span class="badge badge-notapproved">Not Approved</span></td>
+          </tr>
+          <tr>
+            <td>Training data reflecting historical procurement bias</td>
+            <td>Map</td>
+            <td><span class="badge badge-high">High</span></td>
+            <td><span class="badge badge-conditional">Conditional</span></td>
+          </tr>
+          <tr>
+            <td>Over-reliance on AI outputs by procurement staff</td>
+            <td>Govern</td>
+            <td><span class="badge badge-high">High</span></td>
+            <td><span class="badge badge-conditional">Conditional</span></td>
+          </tr>
+          <tr>
+            <td>No right of explanation for affected suppliers</td>
+            <td>Govern</td>
+            <td><span class="badge badge-high">High</span></td>
+            <td><span class="badge badge-notapproved">Not Approved</span></td>
+          </tr>
+          <tr>
+            <td>Supplier gaming of scoring criteria</td>
+            <td>Manage</td>
+            <td><span class="badge badge-medium">Medium</span></td>
+            <td><span class="badge badge-conditional">Conditional</span></td>
+          </tr>
+          <tr>
+            <td>Data integrity of ingested tender submissions</td>
+            <td>Map / Manage</td>
+            <td><span class="badge badge-medium">Medium</span></td>
+            <td><span class="badge badge-conditional">Conditional</span></td>
+          </tr>
+          <tr>
+            <td>Model drift over time reducing scoring accuracy</td>
+            <td>Manage</td>
+            <td><span class="badge badge-medium">Medium</span></td>
+            <td><span class="badge badge-conditional">Conditional</span></td>
+          </tr>
+          <tr>
+            <td>Cybersecurity — unauthorised access to scoring data</td>
+            <td>Manage</td>
+            <td><span class="badge badge-medium">Medium</span></td>
+            <td><span class="badge badge-conditional">Conditional</span></td>
+          </tr>
+          <tr>
+            <td>Vendor lock-in and continuity risk</td>
+            <td>Manage</td>
+            <td><span class="badge badge-low">Low</span></td>
+            <td><span class="badge badge-approved">Approved</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- USE CASE DECISIONS -->
+  <div class="section reveal">
+    <span class="section-label">Use Case Decisions</span>
+    <h2>The split outcome</h2>
+    <p>The assessment concluded with a split decision — reflecting that AI risk is context-dependent and proportionate governance requires nuance, not a binary approve/reject.</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:30%">Use Case</th>
+            <th>Contract Scope</th>
+            <th>Decision</th>
+            <th>Rationale</th>
+          </tr>
+        </thead>
+        <tbody class="usecase-row">
+          <tr>
+            <td>Supplier pre-screening</td>
+            <td>$80K – $200K</td>
+            <td><span class="badge badge-approved">Approved</span></td>
+            <td>Lower stakes, human review at shortlist stage, explainability adequate.</td>
+          </tr>
+          <tr>
+            <td>Weighted criteria scoring</td>
+            <td>$80K – $500K</td>
+            <td><span class="badge badge-conditional">Conditional</span></td>
+            <td>Approved subject to bias testing, audit logging, and explainability controls.</td>
+          </tr>
+          <tr>
+            <td>Automated shortlist ranking</td>
+            <td>$200K – $500K</td>
+            <td><span class="badge badge-conditional">Conditional</span></td>
+            <td>Requires mandatory human review of all ranked outputs before progression.</td>
+          </tr>
+          <tr>
+            <td>Final contract recommendation</td>
+            <td>$200K – $500K</td>
+            <td><span class="badge badge-notapproved">Not Approved</span></td>
+            <td>Insufficient explainability and accountability for high-value decisions.</td>
+          </tr>
+          <tr>
+            <td>SME / Indigenous supplier scoring</td>
+            <td>All values</td>
+            <td><span class="badge badge-notapproved">Not Approved</span></td>
+            <td>Unacceptable bias risk without dedicated fairness testing framework.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- NIST MAPPING -->
+  <div class="section reveal">
+    <span class="section-label">Framework</span>
+    <h2>NIST AI RMF mapping</h2>
+    <p>The assessment was structured around the four core functions of the NIST AI Risk Management Framework:</p>
+    <div class="nist-grid">
+      <div class="nist-card">
+        <h4>Govern</h4>
+        <p>Establishes accountability structures for ProcureIQ — including human oversight requirements, procurement delegate accountability, and supplier redress mechanisms.</p>
+      </div>
+      <div class="nist-card">
+        <h4>Map</h4>
+        <p>Identifies and categorises risks in context — including historical bias in training data and the elevated vulnerability of SME and Indigenous supplier cohorts.</p>
+      </div>
+      <div class="nist-card">
+        <h4>Measure</h4>
+        <p>Quantifies risks through pre-deployment bias testing, ongoing model performance monitoring, and per-submission explainability reporting.</p>
+      </div>
+      <div class="nist-card">
+        <h4>Manage</h4>
+        <p>Implements the controls table — 9 controls across immediate, 30-day, and 90-day implementation timelines, with a named AI Risk Owner designated within DIP.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- REFLECTION -->
+  <div class="section reveal">
+    <span class="section-label">Reflection</span>
+    <h2>Why this project matters</h2>
+    <p>Procurement is one of the highest-stakes applications of AI in the public sector. Errors in supplier evaluation affect commercial outcomes, market competition, and — in the case of SME and Indigenous supplier programs — government policy objectives. Getting it wrong isn't just a technical failure; it's an accountability failure.</p>
+    <p>This assessment demonstrates the kind of thinking AI governance professionals need to bring: not just identifying that risks exist, but understanding who is harmed, why the harm matters in this specific context, and what proportionate controls look like. The split decision — approving some use cases while blocking others — reflects that responsible AI governance is rarely binary.</p>
+    <p>My forensic background directly informed this assessment. The questions I asked of ProcureIQ are the same questions I ask of any system under investigation: can you explain your outputs, can you prove they're reliable, and what happens when they're wrong?</p>
+    <div class="hero-actions" style="margin-top: 2rem;">
+      <a href="ProcureIQ_AI_Risk_Assessment_DivakarS.pdf" download class="btn btn-gold">Download full report (PDF)</a>
+      <a href="portfolio.html#projects" class="btn btn-outline">← Back to projects</a>
+    </div>
+  </div>
+
+</div>
+
+<footer class="page-footer">
+  <a href="portfolio.html" class="footer-logo">S. Divakar</a>
+  <span>AI Governance &amp; Compliance Portfolio — Perth, WA</span>
+  <span>2026</span>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
